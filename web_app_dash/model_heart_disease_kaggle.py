@@ -3,7 +3,7 @@ import pandas as pd
 import joblib
 from sklearn.ensemble import RandomForestClassifier
 
-data = pd.read_csv("data/Heart_Disease_Prediction_kaggle_data.csv")
+data = pd.read_csv("../data/Heart_Disease_Prediction_kaggle_data.csv")
 data["Heart Disease"] = data["Heart Disease"].map({"Absence":0, "Presence": 1})
 data = data.rename(columns={'EKG results': 'ECG results'})
 data = data[data['ECG results'] != 1]

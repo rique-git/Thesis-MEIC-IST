@@ -17,7 +17,7 @@ navbar = dbc.Navbar(
         # Left: Logo or App Name
         html.A(
             dbc.Row([
-                dbc.Col(html.Img(src="images/logo.png", height="30px")),  # You can put your logo in /assets
+                dbc.Col(html.Img(src="/assets/logo.png", height="30px")),  # You can put your logo in /assets
             ], align="center", className="g-0"),
             href="#",
             style={"textDecoration": "none"}
@@ -73,13 +73,13 @@ def display_page(pathname):
     if pathname == "/inicio" or pathname == "/":
         return html.Div([
 
-            # Welcome text
-            html.H1("Bem-vindo à plataforma", className="text-left mt-4"),
-
-            # AF Logo Image
+            # Welcome text + Logo side by side
             html.Div(
-                html.Img(src="logo.png", height="100px"),  # Adjust image source and size
-                className="d-flex justify-content-center"
+                [
+                    html.H1("Bem-vindo à plataforma", className="mb-0"),
+                    html.Img(src="/assets/logo.png", height="80px", style={"marginLeft": "20px"})
+                ],
+                style={"display": "flex", "alignItems": "center", "justifyContent": "flex-start", "marginTop": "20px"}
             ),
 
             # Slim grey separator
@@ -114,7 +114,7 @@ def display_page(pathname):
 
             # IST Logo at the bottom
             html.Div(
-                html.Img(src="/images/ist_logo.png", height="50px"),  # Adjust image source and size
+                html.Img(src="/assets/ist_logo.png", height="50px"),  # Adjust image source and size
                 className="d-flex justify-content-center",
                 style={"marginTop": "30px"}
             ),
