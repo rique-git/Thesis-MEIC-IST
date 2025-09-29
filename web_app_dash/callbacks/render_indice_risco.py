@@ -10,65 +10,78 @@ from myapp import app
 def render_tab(tab):
     if tab == "geral":
         return html.Div([
-                    dbc.Row([
-                        dbc.Col([dbc.Label("Idade"), dbc.Input(id="input-age", type="number", placeholder="Ex: 70")], width=4),
+            dbc.Row([
+                dbc.Col([dbc.Label("Age Range"), dcc.Dropdown(
+                    id="input-age",
+                    options=[
+                        {"label": "40-49", "value": 0},
+                        {"label": "50-59", "value": 1},
+                        {"label": "60-69", "value": 2},
+                        {"label": "70-79", "value": 3},
+                        {"label": "80-89", "value": 4},
+                        {"label": "90+", "value": 5}
+                    ],
+                    placeholder="Select age range"
+                )], width=4),
 
-                        dbc.Col([dbc.Label("Sexo"), dcc.Dropdown(id="input-sex", options=[{"label": "Masculino", "value": 1},
-                                                                                          {"label": "Feminino", "value": 0},
-                                                                                         ], value = 1)], width=4),
+                dbc.Col([dbc.Label("Sex"), dcc.Dropdown(
+                    id="input-sex",
+                    options=[
+                        {"label": "Male", "value": 0},
+                        {"label": "Female", "value": 1}
+                    ],
+                    value=0  # default: Male
+                )], width=4),
 
-                        dbc.Col([dbc.Label("Tipo de Dor no Peito"), dcc.Dropdown(id="input-cp", options=[{"label": "Tipo 1", "value": 0},
-                                                                                                         {"label": "Tipo 2", "value": 1},
-                                                                                                         {"label": "Tipo 3", "value": 2},
-                                                                                                         {"label": "Tipo 4", "value": 3},
-                                                                                                        ], value = 1)], width=4),
-                    ]),
+                dbc.Col([dbc.Label("Weight (kg)"), dbc.Input(id="input-wgt", type="number", value=80)], width=4),
+            ]),
 
-                    dbc.Row([
-                        dbc.Col([dbc.Label("Pressão Arterial"), dbc.Input(id="input-bp", type="number", value = 120)], width=4),
-                        dbc.Col([dbc.Label("Colesterol"), dbc.Input(id="input-chol", type="number", value = 250)], width=4),
-                        dbc.Col([dbc.Label("FBS > 120"), dcc.Dropdown(id="input-fbs", options=[{"label": "Sim", "value": 1},
-                                                                                               {"label": "Não", "value": 0},
-                                                                                              ], value = 0)], width=4),
-                    ]),
+            dbc.Row([
+                dbc.Col([dbc.Label("Height (cm)"), dbc.Input(id="input-hgt", type="number", value=175)], width=4),
+                dbc.Col([dbc.Label("BMI"), dbc.Input(id="input-bmi", type="number", value=25.5)], width=4),
+                dbc.Col([dbc.Label("Systolic BP (SBP)"), dbc.Input(id="input-sbp", type="number", value=120)], width=4),
+            ]),
 
-                    dbc.Row([
-                        dbc.Col([dbc.Label("Resultados ECG"), dcc.Dropdown(id="input-ecg", options=[{"label": "Normal", "value": 0},
-                                                                                                    {"label": "Anormalidade", "value": 1},
-                                                                                                   ], value = 0)], width=4),
+            dbc.Row([
+                dbc.Col([dbc.Label("Diastolic BP (DBP)"), dbc.Input(id="input-dbp", type="number", value=80)], width=4),
+                dbc.Col([dbc.Label("HDL Cholesterol"), dbc.Input(id="input-hdl", type="number", value=45)], width=4),
+                dbc.Col([dbc.Label("LDL Cholesterol"), dbc.Input(id="input-ldl", type="number", value=130)], width=4),
+            ]),
 
-                        dbc.Col([dbc.Label("Frequência Cardíaca Máx"), dbc.Input(id="input-hr", type="number", value = 150)], width=4),
+            dbc.Row([
+                dbc.Col([dbc.Label("Heart Failure History"), dcc.Dropdown(
+                    id="input-hf",
+                    options=[{"label": "Yes", "value": 1}, {"label": "No", "value": 0}],
+                    value=0
+                )], width=4),
 
-                        dbc.Col([dbc.Label("Angina de Exercício"), dcc.Dropdown(id="input-angina", options=[{"label": "Sim", "value": 1},
-                                                                                                            {"label": "Não", "value": 0},
-                                                                                                           ], value = 1)], width=4),
-                    ]),
+                dbc.Col([dbc.Label("Current Smoker"), dcc.Dropdown(
+                    id="input-smk_cur",
+                    options=[{"label": "Yes", "value": 1}, {"label": "No", "value": 0}],
+                    value=0
+                )], width=4),
 
-                    dbc.Row([
-                        dbc.Col([dbc.Label("ST Depression"), dbc.Input(id="input-oldpeak", type="number", value = 2)], width=4),
+                dbc.Col([dbc.Label("Type 1 Diabetes"), dcc.Dropdown(
+                    id="input-t1d",
+                    options=[{"label": "Yes", "value": 1}, {"label": "No", "value": 0}],
+                    value=0
+                )], width=4),
+            ]),
 
-                        dbc.Col([dbc.Label("Slope ST"), dcc.Dropdown(id="input-slope", options=[{"label": "Ascendente", "value": 1},
-                                                                                                {"label": "Horizontal", "value": 2},
-                                                                                                {"label": "Descendente", "value": 3},
-                                                                                               ], value = 2)], width=4),
+            dbc.Button("Predict", id="calcular-btn", color="primary", className="mt-3"),
+            html.Div(id="prediction-output", className="mt-3"),
 
-                        dbc.Col([dbc.Label("Nº Vasos Fluoro"), dbc.Input(id="input-vessels", type="number", value=1)], width=4),
-                    ]),
+            # ✅ Add the graph here
+            dcc.Graph(id="prediction-plot", className="mt-3"),
 
-                    dbc.Row([
-                        dbc.Col([dbc.Label("Talium"), dcc.Dropdown(id="input-thallium", options=[{"label": "Normal", "value": 3},
-                                                                                                 {"label": "Defeito Reversível", "value": 6},
-                                                                                                 {"label": "Defeito Irreversível", "value": 7},
-                                                                                                ], value = 3)], width=4),
-                    ]),
+            dcc.Graph(id="prediction-plot-2", className="mt-3"),
 
-                    dbc.Button("Calcular", id="calcular-btn", color="primary", className="mt-3"),
-                    html.Div(id="prediction-output", className="mt-3"),
+            dcc.Graph(id="prediction-plot-3", className="mt-3"),
+        ])
 
-            ])
 
     elif tab == "comp":
-        return html.Div("Conteúdo das complicações...")
+        return html.Div("Complications content...")
 
     elif tab == "sever":
-        return html.Div("Conteúdo de severidade...")
+        return html.Div("Severity content...")
