@@ -14,7 +14,7 @@ def display_page(pathname):
             # Welcome text + Logo side by side
             html.Div(
                 [
-                    html.H1("Bem-vindo à plataforma", className="mb-0"),
+                    html.H1("Welcome to", className="mb-0"),
                     html.Img(src="/assets/logo.png", height="80px", style={"marginLeft": "20px"})
                 ],
                 style={"display": "flex", "alignItems": "center", "justifyContent": "flex-start", "marginTop": "20px"}
@@ -24,31 +24,17 @@ def display_page(pathname):
             html.Hr(style={"border": "1px solid #D3D3D3", "marginTop": "20px", "marginBottom": "20px"}),
 
             # Platform Description
-            html.P("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut " \
-            "labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris " \
-            "nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit " \
-            "esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt "
-            "in culpa qui officia deserunt mollit anim id est laborum.", className="text-left"),
-
-            # Login info
-            html.P("Pode fazer o login aqui", className="text-left"),
-            html.P("Ainda não tem uma conta? Por favor contacte o administrador", className="text-left"),
+            html.P("AF DETECT is a web-based platform designed to support clinical decision-making in " \
+                    "the field of atrial fibrillation, providing descriptive and predictive resources. ", className="text-left"),
 
             # About the platform
-            html.H4("Sobre", className="mt-4"),
-            html.P("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut " \
-            "labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris " \
-            "nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit " \
-            "esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt "
-            "in culpa qui officia deserunt mollit anim id est laborum.", className="text-left"),
+            html.H4("About", className="mt-4"),
+            html.P("The platform was developed by Henrique Anjos, Rui Henriques, and Rafael Costa at IST, in collaboration with ULSM.", className="text-left"),
 
             # Disclaimer
-            html.H4("Aviso", className="mt-4"),
-            html.P("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut " \
-            "labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris " \
-            "nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit " \
-            "esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt "
-            "in culpa qui officia deserunt mollit anim id est laborum.", className="text-left"),
+            html.H4("Warnings", className="mt-4"),
+            html.P("This tool is currently an in-development prototype intended for use in test settings and should not be relied " \
+            "upon for definitive clinical decisions. The authors cannot guarantee the accuracy of the calculations for any individual patient.", className="text-left"),
 
             # IST Logo at the bottom
             html.Div(
@@ -61,9 +47,9 @@ def display_page(pathname):
     
     elif pathname == "/indice":
         return html.Div([
-            html.H2("Índice de Risco", className="mt-4"),
+            html.H2("Risk Index", className="mt-4 mb-4"),
             dbc.Tabs([
-                dbc.Tab(label="Geral", tab_id="geral"),
+                dbc.Tab(label="Simple", tab_id="geral"),
                 dbc.Tab(label="Advanced", tab_id="comp"),
                 dbc.Tab(label="Multi-Label", tab_id="sever"),
             ], id="tabs", active_tab="geral"),
@@ -72,7 +58,7 @@ def display_page(pathname):
         ]) 
     
     elif pathname == "/ajuda":
-        return html.H2("Página de Ajuda", className="mt-4")
+        return html.H2("Coming Soon", className="mt-4")
     
     else:
-        return html.H2("Página não encontrada", className="mt-4")
+        return html.H2("Page not found", className="mt-4")

@@ -1,4 +1,4 @@
-from dash import html, Input, Output, dcc
+from dash import html, Input, Output, State, dcc
 import dash_bootstrap_components as dbc
 
 from myapp import app
@@ -10,6 +10,57 @@ from myapp import app
 def render_tab(tab):
     if tab == "geral":
         return html.Div([
+
+            # --- Prediction selector and Time Interval selector ---
+            dbc.Row([
+                dbc.Col(
+                    dbc.Select(
+                        id="prediction-selector",
+                        options=[
+                            {"label": "Cardiovascular Death", "value": "cv_death"},
+                            {"label": "Atrial Fibrillation", "value": "af"},
+                            {"label": "Other Outcome", "value": "other"}
+                        ],
+                        value="cv_death",
+                        className="mb-3"
+                    ),
+                    width=4
+                ),
+
+                dbc.Col(
+                    dbc.Select(
+                        id="time-interval-selector",
+                        options=[
+                            {"label": "1 month", "value": 1},
+                            {"label": "3 months", "value": 3},
+                            {"label": "6 months", "value": 6},
+                            {"label": "1 year", "value": 12},
+                            {"label": "2 years", "value": 24},
+                            {"label": "5 years", "value": 60},
+                        ],
+                        value=6,  # default: 6 months
+                        className="mb-3"
+                    ),
+                    width=2
+                ),
+            ], className="mb-3"),  # spacing below the row
+
+            # --- Add/Remove input fields button ---
+            dbc.Row(
+                dbc.Col(
+                    dbc.Button(
+                        "Add/Remove Input Fields",
+                        id="toggle-fields-btn",
+                        color="info",
+                        size="md",
+                        className="mb-3"
+                    ),
+                    width="auto",
+                    className="d-flex justify-content-left"
+                )
+            ),
+
+            # --- Input fields ---
             dbc.Row([
                 dbc.Col([dbc.Label("Age Range"), dcc.Dropdown(
                     id="input-age",
@@ -30,7 +81,7 @@ def render_tab(tab):
                         {"label": "Male", "value": 0},
                         {"label": "Female", "value": 1}
                     ],
-                    value=0  # default: Male
+                    value=0
                 )], width=4),
 
                 dbc.Col([dbc.Label("Weight (kg)"), dbc.Input(id="input-wgt", type="number", value=80)], width=4),
@@ -68,17 +119,29 @@ def render_tab(tab):
                 )], width=4),
             ]),
 
-            dbc.Button("Predict", id="calcular-btn", color="primary", className="mt-3"),
+            # --- Calculate button ---
+            dbc.Row(
+                dbc.Col(
+                    dbc.Button(
+                        "Calculate",
+                        id="calcular-btn",
+                        color="secondary",  # neutral color
+                        size="lg",
+                        className="mt-3"
+                    ),
+                    width="auto",
+                    className="d-flex justify-content-center"
+                )
+            ),
+
+            # --- Output ---
             html.Div(id="prediction-output", className="mt-3"),
 
-            # ✅ Add the graph here
-            dcc.Graph(id="prediction-plot", className="mt-3"),
+            # --- Graphs ---
+            dcc.Graph(id="prediction-plot", className="mt-3", style={"height": "400px"}),
+            dcc.Graph(id="prediction-plot-2", className="mt-3", style={"height": "400px"}),
 
-            dcc.Graph(id="prediction-plot-2", className="mt-3"),
-
-            dcc.Graph(id="prediction-plot-3", className="mt-3"),
         ])
-
 
     elif tab == "comp":
         return html.Div("Complications content...")

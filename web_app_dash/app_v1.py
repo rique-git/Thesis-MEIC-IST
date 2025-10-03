@@ -21,9 +21,9 @@ app.layout = html.Div([
     html.Footer(
         dbc.Container(
             html.Small([
-                "Copyright © 2025 | LOGO-AF",
+                "Copyright © 2025 | AF DETECT",
                 html.Br(),
-                "Updated: YYYY-MM-DD"
+                "Updated: 2025-10-02"
             ], className="text-muted")
         ),
         className="text-center py-3 bg-light"
@@ -33,4 +33,4 @@ app.layout = html.Div([
 
 
 if __name__ == '__main__':
-    app.run(debug=True, port=8052)
+    app.run(debug=True, port=8051)

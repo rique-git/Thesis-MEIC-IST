@@ -14,15 +14,14 @@ navbar = dbc.Navbar(
 
         # Center: Navigation items
         dbc.Nav([
-            dbc.NavItem(dbc.NavLink("Início", href="/inicio")),
-            dbc.NavItem(dbc.NavLink("Índice de Risco", href="/indice")),
-            dbc.NavItem(dbc.NavLink("Ajuda", href="/ajuda")),
+            dbc.NavItem(dbc.NavLink("Home", href="/inicio")),
+            dbc.NavItem(dbc.NavLink("Risk Index", href="/indice")),
+            dbc.NavItem(dbc.NavLink("FAQs", href="/ajuda")),
         ], className="mx-auto", navbar=True),
 
         # Right: Language or login (optional)
         dbc.Nav([
-            dbc.NavItem(dbc.NavLink("EN", href="#")),
-            dbc.NavItem(dbc.NavLink("Entrar", href="#")),
+            dbc.NavItem(dbc.NavLink("PT", href="#")),
         ], navbar=True),
     ]),
     color="#276f48",
