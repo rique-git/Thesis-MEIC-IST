@@ -1,0 +1,3 @@
+[submodule "tre-nova-af"]
+	path = tre-nova-af
+	url = git@github.com:uls-matosinhos/tre-nova-af.git
