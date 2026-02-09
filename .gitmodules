@@ -1,3 +1,6 @@
 [submodule "tre-nova-af"]
 	path = tre-nova-af
 	url = git@github.com:uls-matosinhos/tre-nova-af.git
+[submodule "AF-DETECT"]
+	path = AF-DETECT
+	url = git@github.com:rique-git/AF-DETECT.git
